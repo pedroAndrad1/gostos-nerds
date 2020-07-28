@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Nav from './components/Nav';
+import BannerMain from './components/BannerMain'
+import dados_iniciais from './data/dados_iniciais.json';
+import Carousel from './components/Carousel';
+import Footer from './components/Footer'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{}}>
+      <Nav />
+      <BannerMain 
+        url='https://www.youtube.com/watch?v=RJ6ytUF7Ado' 
+        videoTitle='Blade Runner, Lágrimas nas chuvas'
+        videoDescription='Chorei aqui com essa epifania sobre a nossa insignificante, mas tão bela e preciosa, existência.'
+        />
+      <Carousel category = {dados_iniciais.categorias[0]} ignoreFirstVideo/>
+      <Carousel category = {dados_iniciais.categorias[1]} ignoreFirstVideo/>
+      <Carousel category = {dados_iniciais.categorias[2]} ignoreFirstVideo/>
+      <Carousel category = {dados_iniciais.categorias[3]} ignoreFirstVideo/>
+      <Carousel category = {dados_iniciais.categorias[4]} ignoreFirstVideo/>
+      <Carousel category = {dados_iniciais.categorias[5]} ignoreFirstVideo/>
+      <Footer />
     </div>
   );
 }
