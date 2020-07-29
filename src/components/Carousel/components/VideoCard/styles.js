@@ -4,7 +4,6 @@ export const VideoCardContainer = styled.a`
   border: 2px solid;
   border-radius: 4px;
   text-decoration: none;
-  overflow: hidden;
   cursor: pointer;
   color: white;
   flex: 0 0 298px;
@@ -19,13 +18,29 @@ export const VideoCardContainer = styled.a`
   align-items: flex-end;
   padding: 16px;
 
-  transition: opacity .3s;
+  
+  
+`;
+
+export const VideoTitle = styled.p`
+  
+`
+export const Overlay = styled.div`
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;  
+  right: 0;
+  
+  opacity: 0;
+  background-color: black;
+
+  transition: all .3s;
+  
+
   &:hover,
   &:focus {
-    opacity: .5;
+    opacity: .7
+   
   }
-  
-  &:not(:first-child) {
-    margin-left: 20px;
-  }
-`;
+`
