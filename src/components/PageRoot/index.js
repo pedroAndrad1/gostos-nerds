@@ -10,11 +10,7 @@ const Main = styled.main`
 
     flex: 1; /*Para a ocupar mais espaco que o nav e footer */
 
-    padding-top: 94px; /*O header ta fixed, ou seja, fora do fluxo. Sem isso o Main fica atras dele */
-
-    /** Pra funcionar like a container */
-    padding-left: 5%;
-    padding-right: 5%;
+   
 
 `
 

@@ -16,14 +16,15 @@ export const VideoCardContainer = styled.a`
   position: relative;
   display: flex;
   align-items: flex-end;
-  padding: 16px;
+  padding: 16px; 
+  margin: 7% 0;
 
   
   
 `;
 
 export const VideoTitle = styled.p`
-  
+  padding-left: 3%;
 `
 export const Overlay = styled.div`
   position: absolute;
@@ -34,6 +35,7 @@ export const Overlay = styled.div`
   
   opacity: 0;
   background-color: black;
+  border-radius: 10px;
 
   transition: all .3s;
   

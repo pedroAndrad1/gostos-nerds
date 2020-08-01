@@ -13,7 +13,7 @@ const Container = styled.ul`
     bottom: 0;
     margin: auto;
     width: 30px;
-    height: 30px;
+    height: 50px;
     transform: initial;
     &:before {
       font-size: 30px;
@@ -26,6 +26,20 @@ const Container = styled.ul`
   .slick-next {
     right: 16px;
   }
+
+  .slick-slide {
+    transition: .8s;
+  }
+  .slick-slide:hover {
+    transform: scale(1.1);
+    margin: 0 2em;
+    
+  }
+
+
+  
+
+
 `;
 
 export const SliderItem = styled.li`
@@ -49,6 +63,19 @@ const Slider = ({ children }) => (
             variableWidth: true,
             adaptiveHeight: true,
             accessibility: true,
+            swipeToSlide: true,
+            slidesToShow: 3,
+            slidesToScroll: 2,
+            responsive: [
+              {
+                breakpoint: 800,
+                settings: {
+                  slidesToScroll: 1,
+                  slidesToShow: 1,
+                  swipeToSlide: true,
+                }
+              },
+            ]
         }}
         >
             {children}

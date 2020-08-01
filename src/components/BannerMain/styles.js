@@ -72,6 +72,9 @@ export const BannerMainContainer = styled.section`
   background-image: ${({ backgroundImage }) => `url(${backgroundImage})`}; 
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
   @media (max-width: 800px) {
     height: auto;
     min-height: 50vh;

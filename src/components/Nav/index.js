@@ -1,8 +1,9 @@
 import React from 'react';
-import Menu from '../../Menu.css'
 import logo from '../../assets/img/logo.png'
 import ButtonLink from './components/ButtonLink';
 import { Link } from 'react-router-dom';
+import '../../Menu.css';
+
 const Nav = () =>{
 
     return(
