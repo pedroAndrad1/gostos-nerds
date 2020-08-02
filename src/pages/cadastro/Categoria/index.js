@@ -3,6 +3,7 @@ import PageRoot from '../../../components/PageRoot';
 import { Link } from 'react-router-dom';
 import FormField from '../../../components/FormField';
 import Container from '../../../components/Container';
+import useForm from '../../../hooks/UseForm';
 
 const CadastroCategorias = () => {
 
@@ -12,31 +13,29 @@ const CadastroCategorias = () => {
         cor: '',
     }
     const [categorias, setCategorias] = useState([]);
-    const [values, setValues] = useState(valoresIniciais);
 
-
-    //Funcao generica para aplicar atualizacoes no values do form, que e um object.
-    //Tipo o setState quando se usa uma class
-    function setValue(chave, valor) {
-        setValues({
-            ...values,
-            [chave]: valor,
-        })
-    }
-
-    function handleChange(infosDoEvento) {
-
-        setValue(
-            infosDoEvento.target.getAttribute('name'),
-            infosDoEvento.target.value
-        );
-    }
+    //usando custom hook para lidar com form
+    const { handleChange, values, clearForm } = useForm(valoresIniciais);
 
     //O useEffect e um hook para executar funcoes quando eventos definidos por nos acontecem
     //, passados como segundo parametro. Se nao passar nada, a funcao e chamada em todos os eventos.
     //Se passar um array vazio, a funcao e chamada ao carregar do component
 
     //Aqui estou fazendo um get para o back
+    useEffect(() => {
+        if(window.location.href.includes('localhost')) {
+          const URL = 'https://gostos-nerds.herokuapp.com/categorias'; 
+          fetch(URL)
+           .then(async (respostaDoServer) =>{
+            if(respostaDoServer.ok) {
+              const resposta = await respostaDoServer.json();
+              setCategorias(resposta);
+              return; 
+            }
+            throw new Error('Não foi possível pegar os dados');
+           })
+        }    
+      }, []);
     
     return (
         <PageRoot>
@@ -52,7 +51,7 @@ const CadastroCategorias = () => {
                         values
                     ]);
 
-                    setValues(valoresIniciais)
+                   clearForm();
                 }}>
 
                     <FormField
