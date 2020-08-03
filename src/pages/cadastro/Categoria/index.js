@@ -1,44 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PageRoot from '../../../components/PageRoot';
-import { Link } from 'react-router-dom';
 import FormField from '../../../components/FormField';
 import Container from '../../../components/Container';
 import useForm from '../../../hooks/UseForm';
 import Button from '../../../components/Button';
 import ButtonLink from '../../../components/ButtonLink';
+import CategoriasRepository from '../../../repositories/Categorias'
+import { useHistory } from 'react-router-dom';
 
 const CadastroCategorias = () => {
 
+    const history = useHistory();
     const valoresIniciais = {
         nome: '',
         descricao: '',
         cor: '',
     }
-    const [categorias, setCategorias] = useState([]);
 
     //usando custom hook para lidar com form
     const { handleChange, values, clearForm } = useForm(valoresIniciais);
 
-    //O useEffect e um hook para executar funcoes quando eventos definidos por nos acontecem
-    //, passados como segundo parametro. Se nao passar nada, a funcao e chamada em todos os eventos.
-    //Se passar um array vazio, a funcao e chamada ao carregar do component
 
-    //Aqui estou fazendo um get para o back
-    useEffect(() => {
-        if(window.location.href.includes('localhost')) {
-          const URL = 'https://gostos-nerds.herokuapp.com/categorias'; 
-          fetch(URL)
-           .then(async (respostaDoServer) =>{
-            if(respostaDoServer.ok) {
-              const resposta = await respostaDoServer.json();
-              setCategorias(resposta);
-              return; 
-            }
-            throw new Error('Não foi possível pegar os dados');
-           })
-        }    
-      }, []);
-    
     return (
         <PageRoot>
             <Container>
@@ -48,14 +30,17 @@ const CadastroCategorias = () => {
 
                 <form onSubmit={function handleSubmit(infosDoEvento) {
                     infosDoEvento.preventDefault();
-                    setCategorias([
-                        ...categorias,
-                        values
-                    ]);
+            
+                    CategoriasRepository.createCategory({
+                        titulo: values.titulo,
+                        cor: values.cor
+                    }).then(
+                        history.push('/')
+                    )
 
-                   clearForm();
+                    clearForm();
                 }}
-                style={{marginBottom:'30px'}}
+                    style={{ marginBottom: '30px' }}
                 >
 
                     <FormField
@@ -81,13 +66,13 @@ const CadastroCategorias = () => {
                         value={values.cor}
                         onChange={handleChange}
                     />
-                    
+
                     <Button type='submit'>
                         Cadastrar
                     </Button>
                 </form>
 
-                <ButtonLink to="/"  backgroundcolor='#2A7AE4'>
+                <ButtonLink to="/" backgroundcolor='#2A7AE4'>
                     Home
                  </ButtonLink>
             </Container>

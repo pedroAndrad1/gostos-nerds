@@ -24,6 +24,11 @@
       "id": 5,
       "titulo": "Games",
       "cor": "red"
+    },
+    {
+      "titulo": "Teste",
+      "cor": "#e64db0",
+      "id": 6
     }
   ],
   "videos": [
