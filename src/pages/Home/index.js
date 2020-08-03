@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import dados_iniciais from '../../data/dados_iniciais.json';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel'
@@ -16,7 +16,7 @@ function Home() {
     // http://localhost:8080/categorias?_embed=videos
     categoriasRepository.getAllWithVideos()
       .then((categoriasComVideos) => {
-        console.log(categoriasComVideos[0].videos[0]);
+        //setando os videos vindo do back no state
         setDadosIniciais(categoriasComVideos);
       })
       .catch((err) => {
@@ -28,17 +28,33 @@ function Home() {
   return (
     <PageRoot>
 
-      <BannerMain
-        url='https://www.youtube.com/watch?v=RJ6ytUF7Ado'
-        videoTitle='Blade Runner, Lágrimas nas chuvas'
-        videoDescription='Chorei aqui com essa epifania sobre a nossa insignificante, mas tão bela e preciosa, existência.'
-      />
-      <Carousel category={dados_iniciais.categorias[0]} ignoreFirstVideo />
-      <Carousel category={dados_iniciais.categorias[1]} ignoreFirstVideo />
-      <Carousel category={dados_iniciais.categorias[2]} ignoreFirstVideo />
-      <Carousel category={dados_iniciais.categorias[3]} ignoreFirstVideo />
-      <Carousel category={dados_iniciais.categorias[4]} ignoreFirstVideo />
-      <Carousel category={dados_iniciais.categorias[5]} ignoreFirstVideo />
+      {/** Se o array dados iniciais for maior que 0, que dizer que 
+       * ja chegou a resposta do servidor e foi ok
+       */}
+      {dadosIniciais.length > 0 && dadosIniciais.map((categoria, i) => {
+
+        if (i === 0) {
+          return (
+            <>
+
+              <BannerMain
+                url={dadosIniciais[0].videos[0].url}
+                videoTitle={dadosIniciais[0].videos[0].titulo}
+                videoDescription='Teste'
+              />
+              <Carousel ignoreFirstVideo category={categoria} key={i} />
+
+            </>
+          )
+        }
+
+        return ( <Carousel category={categoria} key={i} /> )
+
+      })
+
+      }
+
+
 
     </PageRoot>
 

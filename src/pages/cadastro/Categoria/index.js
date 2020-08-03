@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import FormField from '../../../components/FormField';
 import Container from '../../../components/Container';
 import useForm from '../../../hooks/UseForm';
+import Button from '../../../components/Button';
+import ButtonLink from '../../../components/ButtonLink';
 
 const CadastroCategorias = () => {
 
@@ -52,7 +54,9 @@ const CadastroCategorias = () => {
                     ]);
 
                    clearForm();
-                }}>
+                }}
+                style={{marginBottom:'30px'}}
+                >
 
                     <FormField
                         label="Nome da Categoria"
@@ -77,25 +81,15 @@ const CadastroCategorias = () => {
                         value={values.cor}
                         onChange={handleChange}
                     />
-                    <button>
+                    
+                    <Button type='submit'>
                         Cadastrar
-                    </button>
+                    </Button>
                 </form>
 
-
-                <ul>
-                    {categorias.map((categoria, indice) => {
-                        return (
-                            <li key={`${categoria}${indice}`}>
-                                {categoria.titulo}
-                            </li>
-                        )
-                    })}
-                </ul>
-
-                <Link to="/">
-                    Ir para home
-            </Link>
+                <ButtonLink to="/"  backgroundcolor='#2A7AE4'>
+                    Home
+                 </ButtonLink>
             </Container>
         </PageRoot>
     )

@@ -1,15 +1,16 @@
 import React from 'react';
 import logo from '../../assets/img/gn_logo.png'
-import ButtonLink from './components/ButtonLink';
+import ButtonLink from '../ButtonLink';
 import { Link } from 'react-router-dom';
 import '../../Menu.css';
 
-const Nav = () =>{
+const Nav = ({nolinkbutton}) =>{
     // teste
     return(
         <nav className='Menu'>
-            <Link to='/'><img src={logo} className='Logo' alt='cypunflix logo'/></Link>
-            <ButtonLink className='ButtonLink' to='cadastro/video'>
+            <Link to='/'><img src={logo} className='Logo' alt='Gostos Nerds logo'/></Link>
+            {/**Colacando "/" antes do endereco no "to" eu evito a concatenacao da url */}
+            <ButtonLink className='ButtonLink' to='/cadastro/video' nolinkbutton={nolinkbutton}>
                 Novo vídeo
             </ButtonLink>
 

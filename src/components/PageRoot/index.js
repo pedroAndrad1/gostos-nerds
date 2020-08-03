@@ -15,11 +15,11 @@ const Main = styled.main`
 `
 
 
-const PageRoot = ({ children }) => {
+const PageRoot = ({ children, nolinkbutton }) => {
 
     return (
         <>
-            <Nav />
+            <Nav nolinkbutton={nolinkbutton}/>
             <Main>
                 {children}
             </Main>
