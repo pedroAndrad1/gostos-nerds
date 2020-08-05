@@ -1,6 +1,6 @@
 import React from 'react';
 import PageRoot from '../../../components/PageRoot';
-import {useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import useForm from '../../../hooks/UseForm';
 import Container from '../../../components/Container'
 import FormField from '../../../components/FormField'
@@ -9,6 +9,7 @@ import VideoRepository from '../../../repositories/Videos'
 import ButtonLink from '../../../components/ButtonLink';
 import styled from 'styled-components';
 import '../../../Menu.css';
+import Toast from '../../../utils/Toast';
 
 const BotoesNavContainer = styled.div`
     
@@ -42,8 +43,13 @@ const CadastroVideos = () => {
                         titulo: values.titulo,
                         url: values.url,
                         categoriaId: 1
-                    }).then(
+                    }).then(() => {
+                        Toast.sucess('Vídeo cadastrado com sucesso!')
                         history.push('/')
+                    }
+                    ).catch(() => {
+                        Toast.error('Não foi possível cadastrar o vídeo.')
+                    }
                     )
 
 

@@ -7,6 +7,7 @@ import Button from '../../../components/Button';
 import ButtonLink from '../../../components/ButtonLink';
 import CategoriasRepository from '../../../repositories/Categorias'
 import { useHistory } from 'react-router-dom';
+import Toast from '../../../utils/Toast';
 
 const CadastroCategorias = () => {
 
@@ -30,12 +31,17 @@ const CadastroCategorias = () => {
 
                 <form onSubmit={function handleSubmit(infosDoEvento) {
                     infosDoEvento.preventDefault();
-            
+
                     CategoriasRepository.createCategory({
                         titulo: values.titulo,
                         cor: values.cor
-                    }).then(
+                    }).then(() => {
+                        Toast.sucess('Categoria cadastrada com sucesso!')
                         history.push('/')
+                    }
+                    ).catch(() => {
+                        Toast.error('Não foi possível cadastrar a categoria.')
+                    }
                     )
 
                     clearForm();
