@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PageRoot from '../../../components/PageRoot';
 import { useHistory } from 'react-router-dom';
 import useForm from '../../../hooks/UseForm';
@@ -6,6 +6,7 @@ import Container from '../../../components/Container'
 import FormField from '../../../components/FormField'
 import Button from '../../../components/Button'
 import VideoRepository from '../../../repositories/Videos'
+import CategoriasRepository from '../../../repositories/Categorias'
 import ButtonLink from '../../../components/ButtonLink';
 import styled from 'styled-components';
 import '../../../Menu.css';
@@ -26,10 +27,24 @@ const CadastroVideos = () => {
     const valoresInicias = {
         titulo: 'Video do Cap',
         url: 'https://www.youtube.com/watch?v=A8jziuBldyA',
-        categoria: 'Front-end'
+        categoria: 4
     }
 
     const { handleChange, values } = useForm(valoresInicias)
+    const [categoriasNomes, setCategoriasNomes] = useState([]);
+    const [categoriasIds, setCategoriasIds] = useState([]);
+    useEffect(() => {
+        CategoriasRepository.getAll()
+            .then(reposta => {
+                const nomes = []
+                const ids = []
+                reposta.map(res => {nomes.push(res.titulo); ids.push(res.id) })
+                setCategoriasNomes(nomes)
+                setCategoriasIds(ids)
+            }).catch(() => {
+                Toast.error('Não foi possível carregar a lista de categorias');
+            })
+    }, [])
 
     return (
         <PageRoot nolinkbutton>
@@ -38,11 +53,12 @@ const CadastroVideos = () => {
 
                 <form onSubmit={function handleSubmit(infosDoEvento) {
                     infosDoEvento.preventDefault();
-
+                    console.log(values)
                     VideoRepository.Create({
                         titulo: values.titulo,
                         url: values.url,
-                        categoriaId: 1
+                        //Estou fazendo esse parseInt pois o value da option vem como string
+                        categoriaId: parseInt(values.categoria) 
                     }).then(() => {
                         Toast.sucess('Vídeo cadastrado com sucesso!')
                         history.push('/')
@@ -75,10 +91,11 @@ const CadastroVideos = () => {
 
                     <FormField
                         label="Categoria"
-                        type="text"
+                        type="select"
                         name="categoria"
-                        value={values.categoria}
                         onChange={handleChange}
+                        options={categoriasIds}
+                        optionsLabels={categoriasNomes}
                     />
 
                     <Button type='submit'>

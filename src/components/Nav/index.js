@@ -3,7 +3,6 @@ import logo from '../../assets/img/gn_logo.png'
 import ButtonLink from '../ButtonLink';
 import { Link } from 'react-router-dom';
 import '../../Menu.css';
-import Toast from '../../utils/Toast'
 
 
 const Nav = ({ nolinkbutton }) => {

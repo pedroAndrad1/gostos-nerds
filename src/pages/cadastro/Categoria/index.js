@@ -10,7 +10,6 @@ import { useHistory } from 'react-router-dom';
 import Toast from '../../../utils/Toast';
 
 const CadastroCategorias = () => {
-
     const history = useHistory();
     const valoresIniciais = {
         nome: '',
@@ -20,67 +19,64 @@ const CadastroCategorias = () => {
 
     //usando custom hook para lidar com form
     const { handleChange, values, clearForm } = useForm(valoresIniciais);
-
-
+    
     return (
         <PageRoot>
             <Container>
+                        <h1>Cadastro de Categoria: {values.nome}</h1>
+
+                        <form onSubmit={function handleSubmit(infosDoEvento) {
+                            infosDoEvento.preventDefault();
+
+                            CategoriasRepository.createCategory({
+                                titulo: values.titulo,
+                                cor: values.cor
+                            }).then(() => {
+                                Toast.sucess('Categoria cadastrada com sucesso!')
+                                history.push('/')
+                            }
+                            ).catch(() => {
+                                Toast.error('Não foi possível cadastrar a categoria.')
+                            }
+                            )
 
 
-                <h1>Cadastro de Categoria: {values.nome}</h1>
+                        }}
+                            style={{ marginBottom: '30px' }}
+                        >
 
-                <form onSubmit={function handleSubmit(infosDoEvento) {
-                    infosDoEvento.preventDefault();
+                            <FormField
+                                label="Nome da Categoria"
+                                type="text"
+                                name="titulo"
+                                value={values.titulo}
+                                onChange={handleChange}
+                            />
 
-                    CategoriasRepository.createCategory({
-                        titulo: values.titulo,
-                        cor: values.cor
-                    }).then(() => {
-                        Toast.sucess('Categoria cadastrada com sucesso!')
-                        history.push('/')
-                    }
-                    ).catch(() => {
-                        Toast.error('Não foi possível cadastrar a categoria.')
-                    }
-                    )
+                            <FormField
+                                label="Descrição"
+                                type="textarea"
+                                name="descricao"
+                                value={values.descricao}
+                                onChange={handleChange}
+                            />
 
-                    clearForm();
-                }}
-                    style={{ marginBottom: '30px' }}
-                >
+                            <FormField
+                                type="color"
+                                name="cor"
+                                onChange={handleChange}
+                                label='Cor'
+                                value= {values.cor}
+                            />
 
-                    <FormField
-                        label="Nome da Categoria"
-                        type="text"
-                        name="titulo"
-                        value={values.titulo}
-                        onChange={handleChange}
-                    />
-
-                    <FormField
-                        label="Descrição"
-                        type="textarea"
-                        name="descricao"
-                        value={values.descricao}
-                        onChange={handleChange}
-                    />
-
-                    <FormField
-                        label="Cor"
-                        type="color"
-                        name="cor"
-                        value={values.cor}
-                        onChange={handleChange}
-                    />
-
-                    <Button type='submit'>
-                        Cadastrar
+                            <Button type='submit'>
+                                Cadastrar
                     </Button>
-                </form>
+                        </form>
 
-                <ButtonLink to="/" backgroundcolor='#2A7AE4'>
-                    Home
-                 </ButtonLink>
+                        <ButtonLink to="/" backgroundcolor='#2A7AE4'>
+                            Home
+                        </ButtonLink>
             </Container>
         </PageRoot>
     )

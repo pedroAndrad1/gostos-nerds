@@ -10,6 +10,9 @@ const FormFieldWrapper = styled.div`
   input[type="color"] {
     padding-left: 56px;
   }
+
+  
+
 `;
 
 const Label = styled.label``;
@@ -78,31 +81,98 @@ const Input = styled.input`
   }
 `;
 
+const Select = styled.select`
+  background: #53585D;
+  color: #F5F5F5;
+  display: block;
+  width: 100%;
+  height: 57px;
+  font-size: 18px;
+  
+  outline: 0;
+  border: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid #53585D;
+  
+  padding: 16px 16px;
+  margin-bottom: 45px;
+  
+  resize: none;
+  border-radius: 4px;
+  transition: border-color .3s;
+  
+  &:focus {
+    border-bottom-color: var(--primary);
+  }
 
-function FormField({ label, type, name, value, onChange }) {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 50%;
+  
+`
+
+const tagSelector = tag => {
+  switch (tag) {
+    case 'textarea':
+      return 'textarea'
+    case 'select':
+      return 'select'
+    default:
+      return 'input'
+  }
+}
+
+function FormField({ label, type, name, value, onChange, options, optionsLabels}) {
   //Ve se o type e um text area
-  const isTypeTextArea = type === 'textarea';
+  // const isTypeTextArea = type === 'textarea';
   //Caso sim, a tag sera um textarea.
   //Caso nao, a tag do formField sera um input por default.
   //Isso usando o 'as' do styled component
-  const tag = isTypeTextArea ? 'textarea' : 'input';
+  //const tag = isTypeTextArea ? 'textarea' : 'input';
+
+  const tag = tagSelector(type);
+
+  const isTypeTextSelect = type === 'select';
+
 
 
   return (
     <FormFieldWrapper>
-      <Label>
-        <Input
-          as={tag}
-          type={type}
-          value={value}
-          name={name}
-          onChange={onChange}
-        />
-        <Label.Text>
-          {label}
+      {
+        isTypeTextSelect === true &&
+
+        <Select onChange={onChange} name={name}>
+          {
+            options.map((option, i) => {
+              return (
+              <option value={option} key={i}>{optionsLabels[i]}</option>
+              )
+            })
+          }
+        </Select>
+      }
+      {
+        isTypeTextSelect === false &&
+        <Label>
+          <Input
+            as={tag}
+            type={type}
+            value={value}
+            name={name}
+            onChange={onChange}
+          >
+
+          </Input>
+          <Label.Text>
+            {label}
         :
         </Label.Text>
-      </Label>
+        </Label>
+      }
     </FormFieldWrapper>
   )
 }
@@ -118,6 +188,7 @@ FormField.propTypes = {
   type: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(String),
 };
 
 export default FormField;
