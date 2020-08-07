@@ -6,8 +6,8 @@ import styled, { css } from 'styled-components';
 const ButtonLinkWrapper = styled(Link)`
   display: block;
   background: ${props => props.backgroundcolor || 'inherit'};
-  color: var(--white);
-  border: 1px solid var(--white);
+  color: var(--secondary);
+  border: 1px solid var(--secondary);
   box-sizing: border-box;
   cursor: pointer;
   padding: 16px 24px;

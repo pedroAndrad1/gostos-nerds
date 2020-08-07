@@ -104,10 +104,10 @@ const CadastroVideos = () => {
                 </form>
 
                 <BotoesNavContainer>
-                    <ButtonLink to='/' backgroundcolor='#2A7AE4' className='mr-3'>
+                    <ButtonLink to='/' className='mr-3'>
                         Home
                     </ButtonLink>
-                    <ButtonLink to='/cadastro/categoria' backgroundcolor='#2A7AE4'>
+                    <ButtonLink to='/cadastro/categoria'>
                         Cadastro de categorias
                     </ButtonLink>
                 </BotoesNavContainer>

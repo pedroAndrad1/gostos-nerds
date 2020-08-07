@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ButtonTemplate = styled.button`
-  color: var(--white);
+  color: var(--secondary);
   background-color: transparent;
-  border: 1px solid var(--white);
+  border: 1px solid var(--secondary);
   box-sizing: border-box;
   cursor: pointer;
   padding: 16px 24px;

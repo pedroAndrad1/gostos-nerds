@@ -14,7 +14,7 @@ const CadastroCategorias = () => {
     const valoresIniciais = {
         nome: '',
         descricao: '',
-        cor: '',
+        cor: '#6600cc',
     }
 
     //usando custom hook para lidar com form
@@ -27,7 +27,7 @@ const CadastroCategorias = () => {
 
                         <form onSubmit={function handleSubmit(infosDoEvento) {
                             infosDoEvento.preventDefault();
-
+                            console.log(values.cor)
                             CategoriasRepository.createCategory({
                                 titulo: values.titulo,
                                 cor: values.cor
@@ -71,10 +71,10 @@ const CadastroCategorias = () => {
 
                             <Button type='submit'>
                                 Cadastrar
-                    </Button>
+                            </Button>
                         </form>
 
-                        <ButtonLink to="/" backgroundcolor='#2A7AE4'>
+                        <ButtonLink to="/" >
                             Home
                         </ButtonLink>
             </Container>

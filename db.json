@@ -3,7 +3,7 @@
     {
       "id": 1,
       "titulo": "Front End",
-      "cor": "#6BD1FF"
+      "cor": "#8000ff"
     },
     {
       "id": 2,
@@ -59,6 +59,15 @@
       "titulo": "ffsaffaf",
       "cor": "",
       "id": 12
+    },
+    {
+      "cor": "#000000",
+      "id": 13
+    },
+    {
+      "titulo": "asff",
+      "cor": "",
+      "id": 14
     }
   ],
   "videos": [
@@ -361,6 +370,18 @@
       "url": "https://www.youtube.com/watch?v=A8jziuBldyA",
       "categoriaId": 4,
       "id": 50
+    },
+    {
+      "titulo": "Video do Cap",
+      "url": "https://www.youtube.com/watch?v=A8jziuBldyA",
+      "categoriaId": 4,
+      "id": 51
+    },
+    {
+      "titulo": "Video do Cap",
+      "url": "https://www.youtube.com/watch?v=A8jziuBldyA",
+      "categoriaId": 4,
+      "id": 52
     }
   ]
 }

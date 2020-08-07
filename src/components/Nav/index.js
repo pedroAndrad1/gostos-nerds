@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../assets/img/gn_logo.png'
+import logo from '../../assets/img/gn-logo2.png'
 import ButtonLink from '../ButtonLink';
 import { Link } from 'react-router-dom';
 import '../../Menu.css';
@@ -15,6 +15,7 @@ const Nav = ({ nolinkbutton }) => {
             <ButtonLink className='ButtonLink' to='/cadastro/video' nolinkbutton={nolinkbutton}>
                 Novo vídeo
             </ButtonLink>
+            
         </nav>
     );
 
