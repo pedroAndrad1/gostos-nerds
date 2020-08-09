@@ -126,7 +126,7 @@ const tagSelector = tag => {
   }
 }
 
-function FormField({ label, type, name, value, onChange, options, optionsLabels}) {
+const FormField = ({ label, type, name, value, onChange, options, optionsLabels}) => {
   //Ve se o type e um text area
   // const isTypeTextArea = type === 'textarea';
   //Caso sim, a tag sera um textarea.
@@ -145,7 +145,7 @@ function FormField({ label, type, name, value, onChange, options, optionsLabels}
       {
         isTypeTextSelect === true &&
 
-        <Select onChange={onChange} name={name}>
+        <Select onChange={onChange} name={name} >
           {
             options.map((option, i) => {
               return (
@@ -164,14 +164,13 @@ function FormField({ label, type, name, value, onChange, options, optionsLabels}
             value={value}
             name={name}
             onChange={onChange}
-          >
-
-          </Input>
+          />
           <Label.Text>
             {label}
         :
         </Label.Text>
         </Label>
+
       }
     </FormFieldWrapper>
   )

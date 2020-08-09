@@ -3,7 +3,9 @@ import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel'
 import PageRoot from '../../components/PageRoot';
 import categoriasRepository from '../../repositories/Categorias'
-
+import styled from 'styled-components';
+import PacmanLoader from 'react-spinners/PacmanLoader'
+import Toast from '../../utils/Toast'
 
 
 
@@ -19,13 +21,31 @@ function Home() {
         setDadosIniciais(categoriasComVideos);
       })
       .catch((err) => {
-        console.log(err.message);
+          Toast.error('Não foi possível carregar os conteúdo da página!')
       });
   }, []);
 
+  const LoaderContainer = styled.div`
+    width: 100%;
+    height: 400px;
+
+    padding-right: 20%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `
 
   return (
     <PageRoot>
+
+      {
+        dadosIniciais.length === 0 &&
+        <LoaderContainer>
+          <PacmanLoader color={'#400080'} size={100} />
+        </LoaderContainer>
+
+      }
 
       {/** Se o array dados iniciais for maior que 0, que dizer que 
        * ja chegou a resposta do servidor e foi ok
@@ -47,7 +67,7 @@ function Home() {
           )
         }
 
-        return ( <Carousel category={categoria} key={i} /> )
+        return (<Carousel category={categoria} key={i} />)
 
       })
 
