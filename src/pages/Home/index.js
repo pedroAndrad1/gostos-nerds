@@ -59,7 +59,7 @@ function Home() {
               <BannerMain
                 url={dadosIniciais[0].videos[0].url}
                 videoTitle={dadosIniciais[0].videos[0].titulo}
-                videoDescription='Teste'
+                videoDescription= 'Aqui encontrará os melhores Gameplays e vlogs!'
               />
               <Carousel ignoreFirstVideo category={categoria} key={i} />
 

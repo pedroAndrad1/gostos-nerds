@@ -94,7 +94,7 @@ const Select = styled.select`
   border-top: 4px solid transparent;
   border-bottom: 4px solid #53585D;
   
-  padding: 16px 16px;
+  padding: 10px 16px;
   margin-bottom: 45px;
   
   resize: none;
@@ -126,7 +126,7 @@ const tagSelector = tag => {
   }
 }
 
-const FormField = ({ label, type, name, value, onChange, options, optionsLabels}) => {
+const FormField = ({ label, type, name, value, onChange, options, optionsLabels }) => {
   //Ve se o type e um text area
   // const isTypeTextArea = type === 'textarea';
   //Caso sim, a tag sera um textarea.
@@ -144,16 +144,18 @@ const FormField = ({ label, type, name, value, onChange, options, optionsLabels}
     <FormFieldWrapper>
       {
         isTypeTextSelect === true &&
-
-        <Select onChange={onChange} name={name} >
-          {
-            options.map((option, i) => {
-              return (
-              <option value={option} key={i}>{optionsLabels[i]}</option>
-              )
-            })
-          }
-        </Select>
+        <>
+          <Select onChange={onChange} name={name} >
+            <option value='Não selecionado' key='Primeiro' disabled selected>Selecione uma categoria...</option>
+            {
+              options.map((option, i) => {
+                return (
+                  <option value={option} key={i}>{optionsLabels[i]}</option>
+                )
+              })
+            }
+          </Select>
+        </>
       }
       {
         isTypeTextSelect === false &&

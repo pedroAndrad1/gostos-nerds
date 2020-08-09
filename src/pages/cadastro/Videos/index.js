@@ -27,7 +27,7 @@ const CadastroVideos = () => {
     const valoresInicias = {
         titulo: '',
         url: '',
-        categoria: 1
+        categoria: 'Não selecionado'
     }
 
     const { handleChange, values } = useForm(valoresInicias)
@@ -36,29 +36,51 @@ const CadastroVideos = () => {
 
     const formValidator = () => {
 
-        const config= {
+        const config = {
             closeButton: false,
             hideProgressBar: true,
             autoClose: 4000,
             position: "top-left",
         }
 
-        let erro = false
+        let ok = true
 
         if (values.titulo.length === 0) {
-           Toast.info('É necessário ter um título!', config)
-           erro = true
+            Toast.info('É necessário ter um título!', config)
+            ok = false;
         }
-        if (values.titulo.length > 30) {
-            Toast.info('O título não deve ter mais de 30 caracteres!', config)
-            erro = true
+        if (values.titulo.length > 70) {
+            console.log(values.titulo.length)
+            Toast.info('O título não deve ter mais de 70 caracteres!', config)
+            ok = false;
         }
         if (values.url.length === 0) {
             Toast.info('É necessário ter uma url!', config)
-            erro = true
+            ok = false;
+        }
+        if (values.categoria === 'Não selecionado') {
+            Toast.info('É necessário selecionar uma categoria!', config)
+            ok = false;
         }
 
-        return !erro;
+
+
+        if (ok) {
+            VideoRepository.Create({
+                titulo: values.titulo,
+                url: values.url,
+                //Estou fazendo esse parseInt pois o value da option vem como string
+                categoriaId: parseInt(values.categoria)
+            }).then(() => {
+                Toast.sucess('Vídeo cadastrado com sucesso!')
+                history.push('/')
+            }
+            ).catch(() => {
+                Toast.error('Não foi possível cadastrar o vídeo.')
+            }
+            )
+        }
+
     }
 
     useEffect(() => {
@@ -81,7 +103,6 @@ const CadastroVideos = () => {
 
                 <form onSubmit={function handleSubmit(infosDoEvento) {
                     infosDoEvento.preventDefault();
-                    console.log(values)
 
                     if (formValidator()) {
                         VideoRepository.Create({
@@ -117,7 +138,6 @@ const CadastroVideos = () => {
                         value={values.url}
                         onChange={handleChange}
                     />
-
                     <FormField
                         label="Categoria"
                         type="select"
