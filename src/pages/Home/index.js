@@ -42,7 +42,7 @@ function Home() {
       {
         dadosIniciais.length === 0 &&
         <LoaderContainer>
-          <PacmanLoader color={'#400080'} size={100} />
+          <PacmanLoader color={'#400080'} size={50} />
         </LoaderContainer>
 
       }
