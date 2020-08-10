@@ -21,7 +21,7 @@ function Home() {
         setDadosIniciais(categoriasComVideos);
       })
       .catch((err) => {
-          Toast.error('Não foi possível carregar os conteúdo da página!')
+          Toast.error('Não foi possível carregar o conteúdo da página!')
       });
   }, []);
 
